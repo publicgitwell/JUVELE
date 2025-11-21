@@ -1,0 +1,464 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background: none;
+}
+
+/* variável para controlar altura da nav */
+:root {
+    --nav-height: 70px;
+}
+
+/* mantém fluxo ao fixar a nav  */
+body {
+    padding-top: var(--nav-height);
+}
+
+/* tornar a nav fixa */
+nav {
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FF5C8A;
+    position: fixed;
+    /* alterado para fixo */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    z-index: 1000;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+    backdrop-filter: saturate(120%) blur(4px);
+}
+
+.logo {
+    color: #fff;
+
+}
+
+nav .logo h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    /* ajustar conforme necessário: 400, 600, 700, etc. */
+    margin: 0;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+nav ul li {
+    list-style-type: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.menu-icon {
+    display: none;
+    /* oculto por padrão em desktop */
+    width: 44px;
+    height: 44px;
+    transition: transform 0.3s ease;
+    transform-origin: center center;
+    z-index: 1100;
+}
+
+.menu-icon i {
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.search-icon {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.search-icon i {
+    color: #fff;
+    font-size: 28px;
+}
+
+/* Search UI ajustado para respeitar a altura fixa */
+.search-bar {
+    position: fixed;
+    top: var(--nav-height);
+    width: 100%;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    z-index: 9;
+    transform-origin: top right;
+    transform: scaleY(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .16s ease, opacity .16s ease;
+}
+
+.search-bar.open {
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.search-bar input[type="search"] {
+    flex: 1;
+    border: 0;
+    outline: none;
+    font-size: 14px;
+    padding: 8px;
+    background: transparent;
+    color: #222;
+}
+
+.search-bar button {
+    border: 0;
+    background: white;
+    color: #FF5C8A;
+    padding: 8px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #FF5C8A;
+    font-weight: 600;
+}
+
+.search-results {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+    max-height: 280px;
+    overflow: auto;
+    z-index: 7;
+    display: none;
+}
+
+.search-results.open {
+    display: block;
+}
+
+.search-item {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f2f2f2;
+    cursor: pointer;
+    font-size: 14px;
+    color: #222;
+}
+
+.search-item:last-child {
+    border-bottom: 0;
+}
+
+.search-item:hover,
+.search-item:focus {
+    background: #faf7fb;
+    outline: none;
+}
+
+/* mobile adjustments */
+@media (max-width:700px) {
+    nav ul {
+        position: absolute;
+        top: var(--nav-height);
+        /* usa a variável */
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        text-align: center;
+        background: #FF5C8A;
+        gap: 0;
+        overflow: hidden;
+        z-index: 10;
+    }
+
+    nav ul li {
+        padding: 20px;
+        padding-top: 10px;
+    }
+
+    /* ícones à direita e alinhados verticalmente no mobile */
+    .menu-icon {
+        display: flex;
+        position: absolute;
+        right: 19px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1100;
+        transition: transform 0.3s ease;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        transform-origin: center center;
+    }
+
+    .search-icon {
+        display: block;
+        position: absolute;
+        right: calc(19px + 44px + 12px);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1100;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    #menuList {
+        transition: all 0.5s;
+    }
+
+    /* Colapsa o menu por padrão e anima com max-height */
+    nav ul {
+        max-height: 0;
+        transition: max-height 0.35s ease, padding 0.35s ease;
+        pointer-events: none;
+    }
+
+    /* Quando a classe open estiver presente, expande o menu */
+    nav ul.open {
+        max-height: 600px;
+        /* ajuste conforme número de itens */
+        pointer-events: auto;
+    }
+
+    /* opcional: suaviza o aparecimento dos itens */
+    nav ul li {
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    nav ul.open li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .search-bar {
+
+        width: 100%;
+    }
+}
+
+.promotion {
+    position: relative;
+    overflow: hidden;
+    /* ajustado para esconder o blur escalado */
+    /* removida a background-image daqui: agora a imagem fica em ::before */
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% auto;
+    height: clamp(260px, 60vh, 560px);
+    max-height: 580px;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 12px 0;
+    /* z-index removido para evitar conflito com pseudo-elements */
+}
+
+/* imagem de fundo em ::before para poder aplicar blur */
+.promotion::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('../recursos/image.png');
+    background-repeat: repeat;
+    background-position: top center;
+    background-size: 420px;
+    /* mantém a escala pela largura como antes */
+    filter: blur(0.34px);
+    /* ajuste a intensidade do blur aqui */
+    transform: scale(1.04);
+    /* escala suave para evitar bordas transparentes após o blur */
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* overlay escuro permanente (já presente, mantém a legibilidade) */
+.promotion::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.38);
+    /* ajuste opacidade para mais/menos escuridão */
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* mantém o texto acima de tudo */
+.promo-text {
+    position: relative;
+    z-index: 2;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 40;
+    /* exemplo: 300 light, 400 normal, 600 semibold, 700 bold, 800 extra-bold */
+    font-size: clamp(1.6rem, 10vw, 2.8rem);
+    color: #ffffff;
+    padding: 100px 20px;
+    border-radius: 80px;
+    max-width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    line-height: 1.05;
+    transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
+
+    /* glassmorphism + soft highlight */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 100px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+
+    /* subtle depth and readability */
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+/*  caso queira um subtítulo menor */
+.promo-text small {
+    display: block;
+    font-weight: 400;
+    font-size: 0.45em;
+    margin-top: 8px;
+    opacity: 0.95;
+    letter-spacing: 0.6px;
+}
+
+
+.vantagens {
+    max-width: 1100px;
+    margin: 1px auto;
+    display: flex;
+    gap: 20px;
+    padding: 8px;
+    align-items: stretch;
+    flex-wrap: nowrap;
+}
+
+.vantagens>div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: rgb(255, 255, 255);
+    border: rgba(0, 0, 0, 0.273) 1px solid;
+    transition: transform .28s cubic-bezier(.2, .9, .3, 1), box-shadow .28s, border-color .28s;
+    min-height: 200px;
+    min-width: 0;
+    opacity: 1;
+    transition: opacity 0.6s ease-in-out;
+}
+
+/* estrutura interna: ícone + título no topo, descrição abaixo */
+.vantagens strong {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+/* círculo gradiente para o ícone */
+.vantagens strong i {
+    width: 26px;
+    height: 26px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #e86f95;
+    background: #f3f1f100;
+    border: 1px solid #e86f95;
+
+    flex-shrink: 0;
+}
+
+/* rótulo principal em letras maiúsculas e mais marcante */
+.vantagens strong p {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 700;
+    color: #111;
+    font-size: 0.95rem;
+}
+
+/* descrição secundária com tom suave e leitura confortável */
+.vantagens>div p {
+    margin: 6px 0 0 0;
+    color: #000000;
+    font-size: 0.92rem;
+    line-height: 1.35;
+    font-weight: 500;
+    opacity: 1;
+}
+
+/* alinhamento adicional quando houver estrutura diferente no HTML */
+.vantagens .v1,
+.vantagens .v2,
+.vantagens .v3 {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* Distribui o conteúdo do topo */
+}
+
+/* responsividade */
+@media (max-width: 800px) {
+    .vantagens {
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 14px;
+        padding: 18px;
+        overflow-x: visible;
+    }
+
+    .vantagens>div {
+        min-height: 140px;
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .vantagens strong i {
+        width: 28px;
+        height: 28px;
+        font-size: 10px;
+        border: 1px solid #e86f95;
+        color: #e86f95;
+    }
+
+    .vantagens strong p,
+    .vantagens>div p {
+        font-size: 0.92rem;
+    }
+}

@@ -1,0 +1,242 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+html,body{
+    height: 100%;
+    width: 100%;
+    background: none;
+}
+
+/* variável para controlar altura da nav */
+:root {
+    --nav-height: 70px;
+}
+
+/* mantém fluxo ao fixar a nav */
+body {
+    padding-top: var(--nav-height);
+}
+
+/* tornar a nav fixa */
+nav{
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FF5C8A;
+    position: fixed; /* alterado para fixo */
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    z-index: 1000;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.08);
+    backdrop-filter: saturate(120%) blur(4px);
+}
+
+.logo{
+    color: #fff;
+  
+}
+
+nav .logo h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; /* ajustar conforme necessário: 400, 600, 700, etc. */
+    margin: 0;
+}
+
+nav ul{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+nav ul li{
+    list-style-type: none;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.menu-icon{
+    display: none; /* oculto por padrão em desktop */
+    width: 44px;
+    height: 44px;
+    transition: transform 0.3s ease;
+    transform-origin: center center;
+    z-index: 1100;
+}
+
+.menu-icon i{
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.search-icon {
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.search-icon i {
+    color: #fff;
+    font-size: 28px;
+}
+
+/* Search UI ajustado para respeitar a altura fixa */
+.search-bar {
+    position: fixed;
+    top: var(--nav-height);
+    right: 18px;
+    width: 100%;
+    max-width: calc(100% - 32px);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    z-index: 9;
+    transform-origin: top right;
+    transform: scaleY(0);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .16s ease, opacity .16s ease;
+}
+.search-bar.open {
+    transform: scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+.search-bar input[type="search"]{
+    flex: 1;
+    border: 0;
+    outline: none;
+    font-size: 14px;
+    padding: 8px;
+    background: transparent;
+    color: #222;
+}
+.search-bar button{
+    border: 0;
+    background: #FF5C8A;
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.search-results {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    max-height: 280px;
+    overflow: auto;
+    z-index: 7;
+    display: none;
+}
+.search-results.open { display: block; }
+.search-item {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f2f2f2;
+    cursor: pointer;
+    font-size: 14px;
+    color: #222;
+}
+.search-item:last-child { border-bottom: 0; }
+.search-item:hover, .search-item:focus { background: #faf7fb; outline: none; }
+
+/* mobile adjustments */
+@media (max-width:700px) {
+    nav ul{
+        position: absolute;
+        top: var(--nav-height); /* usa a variável */
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        text-align: center;
+        background: #FF5C8A;
+        gap: 0;
+        overflow: hidden;
+        z-index: 10;
+    }
+
+    nav ul li{
+        padding: 20px;
+        padding-top: 0;
+    }
+
+    /* ícones à direita e alinhados verticalmente no mobile */
+    .menu-icon{
+        display: flex;
+        position: absolute;
+        right: 19px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1100;
+        transition: transform 0.3s ease;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        transform-origin: center center;
+    }
+
+    .search-icon {
+        display: block;
+        position: absolute;
+        right: calc(19px + 44px + 12px);
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1100;
+        margin: 0;
+        cursor: pointer;
+    }
+
+    #menuList{
+        transition: all 0.5s;
+    }
+
+    /* Colapsa o menu por padrão e anima com max-height */
+    nav ul {
+        max-height: 0;
+        transition: max-height 0.35s ease, padding 0.35s ease;
+        pointer-events: none;
+    }
+
+    /* Quando a classe open estiver presente, expande o menu */
+    nav ul.open {
+        max-height: 600px; /* ajuste conforme número de itens */
+        pointer-events: auto;
+    }
+
+    /* opcional: suaviza o aparecimento dos itens */
+    nav ul li {
+        opacity: 0;
+        transform: translateY(-6px);
+        transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    nav ul.open li {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .search-bar {
+        right: 12px;
+        left: 12px;
+        width: auto;
+    }
+}

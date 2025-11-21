@@ -1,0 +1,83 @@
+[
+    {
+        "id": 1,
+        "nome": "Vestido Floral Primavera",
+        "descricao": "Vestido leve com estampa floral, perfeito para ocasiões casuais e festas de verão.",
+        "preco": 199.90,
+        "imagem": "https://weslleykholsinho.github.io/juvele-imd/cp000x01.png",
+        "destaque": true,
+        "categoria": "Vestidos"
+    },
+    {
+        "id": 2,
+        "nome": "Blusa de Linho Bege",
+        "descricao": "Blusa feminina em linho com corte oversized, confortável e elegante.",
+        "preco": 129.50,
+        "imagem": "https://weslleykholsinho.github.io/juvele-imd/cp000x02.png",
+        "destaque": true,
+        "categoria": "Blusas"
+    },
+    {
+        "id": 3,
+        "nome": "Saia Midi Plissada",
+        "descricao": "Saia midi plissada com caimento fluido. Combine com salto ou tênis.",
+        "preco": 149.00,
+        "imagem": "https://weslleykholsinho.github.io/juvele-imd/cp000x03.png",
+        "destaque": true,
+        "categoria": "Saias"
+    },
+    {
+        "id": 4,
+        "nome": "Calça Jeans Skinny",
+        "descricao": "Calça jeans skinny com lavagem escura, ideal para looks do dia a dia.",
+        "preco": 179.90,
+        "imagem": "https://weslleykholsinho.github.io/juvele-imd/cp000x04.png",
+        "destaque": false,
+        "categoria": "Calças"
+    },
+    {
+        "id": 5,
+        "nome": "Jaqueta de Couro Sintético",
+        "descricao": "Jaqueta de couro sintético preta, estilo biker, perfeita para adicionar atitude ao seu visual.",
+        "preco": 249.90,
+        "imagem": "https://weslleykholsinho.github.io/juvele-imd/cp000x05.png",
+        "destaque": true,
+        "categoria": "Jaquetas"
+    },
+    {
+        "id": 6,
+        "nome": "Macacão Pantacourt",
+        "descricao": "Macacão pantacourt em tecido leve, com decote V e amarração na cintura.",
+        "preco": 219.90,
+        "imagem": "https://weslleykholsinho.github.io/juvele-imd/cp000x06.png",
+        "destaque": true,
+        "categoria": "Macacões"
+    },
+    {
+        "id": 7,
+        "nome": "Camisa Social Branca",
+        "descricao": "Camisa social branca clássica, versátil para o trabalho ou eventos formais.",
+        "preco": 139.90,
+        "imagem": "https://weslleykholsinho.github.io/juvele-imd/cp000x07.png",
+        "destaque": true,
+        "categoria": "Camisas"
+    },
+    {
+        "id": 8,
+        "nome": "Shorts de Alfaiataria",
+        "descricao": "Shorts de alfaiataria em tom neutro, ideal para um look sofisticado no verão.",
+        "preco": 119.90,
+        "imagem": "https://weslleykholsinho.github.io/juvele-imd/cp000x08.png",
+        "destaque": true,
+        "categoria": "Shorts"
+    },
+    {
+        "id": 9,
+        "nome": "Trench Coat Bege",
+        "descricao": "Trench coat clássico em tom bege, perfeito para dias mais frescos e chuvosos.",
+        "preco": 299.90,
+        "imagem": "https://weslleykholsinho.github.io/juvele-imd/cp000x09.png",
+        "destaque": true,
+        "categoria": "Casacos"
+    }
+]

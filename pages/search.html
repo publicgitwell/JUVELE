@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUVELE - Moda Feminina</title>
+    <link rel="shortcut icon" href="../fav.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./search-page/search-page.css">
+
+</head>
+
+<body>
+
+    <!--PARTE DE CIMA Titulo, logotipo e Navbar-->
+    <header>
+        <a href="central.html">Voltar</a>
+        <h1>Resultados da busca</h1>
+
+
+        <nav>
+            <div class="logo">
+                <h1>JUVELE</h1>
+            </div>
+            <ul id="menuList">
+                <li><a href="/central.html" id="op1"></a></li>
+                <li><a href="" id="op2"></a></li>
+                <li><a href="" id="op3"></a></li>
+                <li><a href="" id="op4"></a></li>
+                <li><a href="" id="op5"></a></li>
+            </ul>
+            <div class="search-icon">
+                <i class="fa-solid fa-search"></i>
+            </div>
+            <div class="menu-icon">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <div class="search-icon" aria-hidden="true">
+        <!-- mantenha seu ícone atual aqui (ex.: <i class="fa fa-search"></i>) -->
+    </div>
+
+
+
+    <form id="siteSearch" class="search-bar" role="search" aria-label="Pesquisar no site" onsubmit="return false;">
+        <input id="searchInput" type="search" placeholder="Pesquisar..." aria-label="Pesquisar" />
+        <button id="searchSubmit" type="button" aria-label="Buscar">Buscar</button>
+        <div id="searchResults" class="search-results" role="listbox" aria-hidden="true"></div>
+    </form>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity=""
+        crossorigin="anonymous">
+    <script src="./recursos/nav.js"></script>
+    <script src="./pr-def.js"></script>
+    <!-- Container para os cartões de produto (será preenchido pelo script abaixo) -->
+    <main id="searchResultsContainer" class="products-grid" aria-live="polite"></main>
+    <script src="./search-page/search-results.js"></script>
+
+</body>
+
+</html>
